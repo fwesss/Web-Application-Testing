@@ -39,8 +39,11 @@ describe('Balls', () => {
       </App>,
     );
 
-    expect(getByLabelText(/Balls/i).textContent).toBe('3');
+    expect(getByLabelText(/Balls/i).textContent).toBe('0');
 
+    fireEvent.click(getByText('Ball'));
+    fireEvent.click(getByText('Ball'));
+    fireEvent.click(getByText('Ball'));
     fireEvent.click(getByText('Ball'));
 
     expect(getByLabelText(/Balls/i).textContent).toBe('0');
@@ -63,7 +66,7 @@ describe('Strikes', () => {
     expect(getByLabelText(/Strikes/i).textContent).toBe('1');
   });
 
-  it('Strikes resets after 3 strike', () => {
+  it('Strikes resets after 3 strikes', () => {
     const { getByLabelText, getByText } = render(
       <App>
         <Display />
@@ -71,8 +74,10 @@ describe('Strikes', () => {
       </App>,
     );
 
-    expect(getByLabelText(/Strikes/i).textContent).toBe('2');
+    expect(getByLabelText(/Strikes/i).textContent).toBe('0');
 
+    fireEvent.click(getByText('Strike'));
+    fireEvent.click(getByText('Strike'));
     fireEvent.click(getByText('Strike'));
 
     expect(getByLabelText(/Strikes/i).textContent).toBe('0');
@@ -103,8 +108,10 @@ describe('Fouls', () => {
       </App>,
     );
 
-    expect(getByLabelText(/Strikes/i).textContent).toBe('2');
+    expect(getByLabelText(/Strikes/i).textContent).toBe('0');
 
+    fireEvent.click(getByText('Foul'));
+    fireEvent.click(getByText('Foul'));
     fireEvent.click(getByText('Foul'));
 
     expect(getByLabelText(/Strikes/i).textContent).toBe('2');
@@ -120,8 +127,13 @@ describe('Hits', () => {
       </App>,
     );
 
-    expect(getByLabelText(/Balls/i).textContent).toBe('2');
-    expect(getByLabelText(/Strikes/i).textContent).toBe('2');
+    expect(getByLabelText(/Balls/i).textContent).toBe('0');
+    fireEvent.click(getByText('Ball'));
+    fireEvent.click(getByText('Ball'));
+
+    expect(getByLabelText(/Strikes/i).textContent).toBe('0');
+    fireEvent.click(getByText('Strike'));
+    fireEvent.click(getByText('Strike'));
 
     fireEvent.click(getByText('Hit'));
 
