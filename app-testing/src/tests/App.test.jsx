@@ -41,10 +41,11 @@ describe('Balls', () => {
 
     expect(getByLabelText(/Balls/i).textContent).toBe('0');
 
-    fireEvent.click(getByText('Ball'));
-    fireEvent.click(getByText('Ball'));
-    fireEvent.click(getByText('Ball'));
-    fireEvent.click(getByText('Ball'));
+    const maxBalls = 3;
+
+    for (let i = 0; i <= maxBalls; i += 1) {
+      fireEvent.click(getByText('Ball'));
+    }
 
     expect(getByLabelText(/Balls/i).textContent).toBe('0');
   });
@@ -76,9 +77,11 @@ describe('Strikes', () => {
 
     expect(getByLabelText(/Strikes/i).textContent).toBe('0');
 
-    fireEvent.click(getByText('Strike'));
-    fireEvent.click(getByText('Strike'));
-    fireEvent.click(getByText('Strike'));
+    const maxStrikes = 2;
+
+    for (let i = 0; i <= maxStrikes; i += 1) {
+      fireEvent.click(getByText('Strike'));
+    }
 
     expect(getByLabelText(/Strikes/i).textContent).toBe('0');
   });
