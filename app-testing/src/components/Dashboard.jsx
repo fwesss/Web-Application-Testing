@@ -1,22 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Box from 'mineral-ui/Box';
 import Button from 'mineral-ui/Button';
+import ButtonGroup from 'mineral-ui/ButtonGroup/ButtonGroup';
 
 const Dashboard = ({
-  balls, setBalls, strikes, setStrikes,
+  balls, setBalls, strikes, setStrikes, reset,
 }) => {
-  const reset = () => {
-    setStrikes(0);
-    setBalls(0);
-  };
-
   const handleStrike = () => {
-    if (strikes < 2) {
-      setStrikes(strikes + 1);
-    } else {
-      reset();
-    }
+    setStrikes(strikes + 1);
   };
 
   const handleBall = () => {
@@ -57,12 +48,12 @@ const Dashboard = ({
   };
 
   return (
-    <Box>
+    <ButtonGroup aria-label="Score" text>
       <Button type="button" onClick={() => (handleAction('strike'))}>Strike</Button>
       <Button type="button" onClick={() => (handleAction('ball'))}>Ball</Button>
       <Button type="button" onClick={() => (handleAction('foul'))}>Foul</Button>
       <Button type="button" onClick={() => (handleAction('hit'))}>Hit</Button>
-    </Box>
+    </ButtonGroup>
   );
 };
 

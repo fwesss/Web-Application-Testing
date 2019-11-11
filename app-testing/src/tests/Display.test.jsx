@@ -144,3 +144,62 @@ describe('Hits', () => {
     expect(getByLabelText(/Strikes/i).textContent).toBe('0');
   });
 });
+
+describe('Outs', () => {
+  const maxStrikes = 3;
+
+  it('Outs increases by 1 after 3 strikes', () => {
+    const { getByLabelText, getByText } = render(
+      <App />,
+    );
+
+    expect(getByLabelText(/Outs/i).textContent).toBe('0');
+
+    for (let i = 0; i < maxStrikes; i += 1) {
+      fireEvent.click(getByText('Strike'));
+    }
+
+    expect(getByLabelText(/Outs/i).textContent).toBe('1');
+  });
+});
+
+describe('Innings', () => {
+  const maxStrikes = 9;
+
+  it('Switches at bat team after 3 outs', () => {
+    const { getByLabelText, getByText } = render(
+      <App />,
+    );
+
+    expect(getByLabelText(/At Bat/i).textContent).toBe('Home');
+
+    for (let i = 0; i < maxStrikes; i += 1) {
+      fireEvent.click(getByText('Strike'));
+    }
+
+    expect(getByLabelText(/At Bat/i).textContent).toBe('Away');
+  });
+
+  it('Increments inning after away team receives 3 outs', () => {
+    const { getByLabelText, getByText } = render(
+      <App />,
+    );
+
+    expect(getByLabelText(/At Bat/i).textContent).toBe('Home');
+    expect(getByLabelText(/Inning/i).textContent).toBe('1');
+
+    for (let i = 0; i < maxStrikes; i += 1) {
+      fireEvent.click(getByText('Strike'));
+    }
+
+    expect(getByLabelText(/At Bat/i).textContent).toBe('Away');
+    expect(getByLabelText(/Inning/i).textContent).toBe('1');
+
+    for (let i = 0; i < maxStrikes; i += 1) {
+      fireEvent.click(getByText('Strike'));
+    }
+
+    expect(getByLabelText(/At Bat/i).textContent).toBe('Home');
+    expect(getByLabelText(/Inning/i).textContent).toBe('2');
+  });
+});

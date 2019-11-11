@@ -2,7 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Box from 'mineral-ui/Box';
 
-const Display = ({ balls, strikes }) => (
+const Display = ({
+  balls, strikes, outs, atBat, inning
+}) => (
   <Box>
     <h2 id="balls">
       Balls:
@@ -14,6 +16,24 @@ const Display = ({ balls, strikes }) => (
       Strikes:
       {' '}
       <span aria-labelledby="strikes">{strikes}</span>
+    </h2>
+
+    <h2 id="at-bat">
+      At bat:
+      {' '}
+      <span aria-labelledby="at-bat">{atBat}</span>
+    </h2>
+
+    <h2 id="outs">
+      Outs:
+      {' '}
+      <span aria-labelledby="outs">{outs}</span>
+    </h2>
+
+    <h2 id="innings">
+      Inning:
+      {' '}
+      <span aria-labelledby="innings">{inning}</span>
     </h2>
   </Box>
 );
